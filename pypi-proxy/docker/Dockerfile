@@ -37,11 +37,11 @@ ENV DOCKER_REPOSITORY ${DOCKER_REPOSITORY}
 LABEL maintainer=$MAINTAINER
 LABEL org.label-schema.schema-version="2.0"
 LABEL org.label-schema.build-date=$BUILD_TIMESTAMP
-LABEL org.label-schema.name="anasen/devpi"
+LABEL org.label-schema.name="zorglub/devpi"
 LABEL org.label-schema.description="devpi: PyPI server and packaging/testing/release tool"
 LABEL org.label-schema.url="https://devpi.net"
 LABEL org.label-schema.vcs-url=$CI_PROJECT_URL
 LABEL org.label-schema.vcs-ref=$GIT_COMMIT_ID
-LABEL org.label-schema.vendor="ANASEN"
+LABEL org.label-schema.vendor="zorglub"
 LABEL org.label-schema.version=$GIT_REF_NAME
-LABEL org.label-schema.docker.cmd="docker run --name=devpi -d -l anasen -l role=devpi $DOCKER_REPOSITORY/devpi"
+LABEL org.label-schema.docker.cmd="docker run --name=devpi -d -l zorglub -l role=devpi $DOCKER_REPOSITORY/devpi"
