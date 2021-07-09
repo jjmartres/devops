@@ -1,0 +1,18 @@
+{
+  "cluster": {
+    "name": "cluster-name",
+    "location": "europe-west1-c",
+    "project": "gcp-project-id"
+  },
+  "values": {
+    "hostname": "pypi.ops.zorglub.io",
+    "public_ip": "pypi-ops-zorglub-io",
+    "replicas": "2",
+    "history_limit": "3",
+    "storage": {
+      "size": "8Gi",
+      "class": "standard"
+    },
+    "timeout": "600"
+  }
+}

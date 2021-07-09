@@ -1,0 +1,12 @@
+devpi==2.2.0
+devpi-cleaner==0.2.0
+devpi-client== 5.2.1
+devpi-common== 3.6.0
+devpi-findlinks==2.0.1
+devpi-ldap==1.2.2
+devpi-lockdown==1.0.1
+devpi-plumber==0.5.1
+devpi-semantic-ui==0.2.2
+devpi-server==5.5.0
+devpi-web==4.0.5
+pyramid==1.10.8
