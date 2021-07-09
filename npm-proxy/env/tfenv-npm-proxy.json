@@ -1,0 +1,11 @@
+{
+  "cluster": {
+    "name": "cluster-name",
+    "location": "europe-west1-c",
+    "project": "gcp-project-id"
+  },
+  "values": {
+    "version": "4.10.0",
+    "timeout": "600"
+  }
+}

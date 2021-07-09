@@ -1,0 +1,93 @@
+service:
+  type: NodePort
+#  annotations:
+#    beta.cloud.google.com/backend-config: '{"ports": { "http": "cloud-armor" } }'
+
+persistence:
+  enabled: true
+  storageClass: "standard"
+  accessMode: ReadWriteOnce
+  size: 8Gi
+
+ingress:
+  enabled: true
+  annotations:
+      "kubernetes.io/ingress.global-static-ip-name": "npm-ops-zorglub-io"
+      "networking.gke.io/managed-certificates": "npm.ops.zorglub.io"
+  paths:
+    - /*
+  hosts:
+    - npm.ops.zorglub.io
+
+configMap: |
+  storage: /verdaccio/storage/data
+  web:
+    # WebUI is enabled as default, if you want disable it, just uncomment this line
+    enable: true
+    title: NPM proxy private registry
+
+  auth:
+    htpasswd:
+      file: /verdaccio/storage/htpasswd
+      # Maximum amount of users allowed to register, defaults to "+infinity".
+      # You can set this to -1 to disable registration.
+      #max_users: 1000
+  # a list of other known repositories we can talk to
+
+  uplinks:
+    npm:
+      url: https://registry.npmjs.org/
+      agent_options:
+        keepAlive: true
+        maxSockets: 40
+        maxFreeSockets: 10
+    yarn:
+      url: https://registry.yarnpkg.com
+      agent_options:
+        keepAlive: true
+        maxSockets: 40
+        maxFreeSockets: 10
+    cnpm:
+      url: https://r.cnpmjs.org/
+      agent_options:
+        keepAlive: true
+        maxSockets: 40
+        maxFreeSockets: 10
+    taobao:
+      url: https://registry.npm.taobao.org/
+      agent_options:
+        keepAlive: true
+        maxSockets: 40
+        maxFreeSockets: 10
+    nj:
+      url: https://registry.nodejitsu.com/
+      agent_options:
+        keepAlive: true
+        maxSockets: 40
+        maxFreeSockets: 10
+    skimdb:
+      url: https://skimdb.npmjs.com/registry
+      agent_options:
+        keepAlive: true
+        maxSockets: 40
+        maxFreeSockets: 10
+
+  packages:
+    '@*/*':
+      access: $all
+      publish: $authenticated
+      proxy: npm yarn cnpm taobao nj skimdb
+    '**':
+      access: $all
+      publish: $authenticated
+      proxy: npm yarn cnpm taobao nj skimdb
+
+  # To use `npm audit` uncomment the following section
+  middlewares:
+    audit:
+      enabled: true
+
+  # log settings
+  logs:
+    - {type: stdout, format: pretty, level: http}
+    #- {type: file, path: verdaccio.log, level: info}

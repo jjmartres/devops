@@ -1,0 +1,10 @@
+apiVersion: networking.gke.io/v1beta1
+kind: ManagedCertificate
+metadata:
+  name: npm.ops.zorglub.io
+  labels:
+    app: verdaccio
+    stack: helm
+spec:
+  domains:
+    - npm.ops.zorglub.io
